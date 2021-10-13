@@ -5,6 +5,17 @@ import sys
 
 
 def load_data(messages_filepath, categories_filepath):
+    """
+    Loads data csv-files:
+        - disaster_categories.csv
+        - disaster_messages.csv .
+    
+    Parameters:
+    - Filepaths as mentioned above.
+    
+    Returns:
+    -
+    """
     
     # load messages dataset
     messages = pd.read_csv(messages_filepath)
@@ -16,6 +27,18 @@ def load_data(messages_filepath, categories_filepath):
     return(messages.merge(categories))
 
 def clean_data(df):
+    """
+    cleans dataframe:
+        - extracts categories and create columns for each category
+        - changes 2 to 0 in category 'relevant'
+        - removes category 'child_alone'
+    
+    Parameters:
+    - dataframe to be cleaned.
+    
+    Returns:
+    - cleaned dataframe.
+    """
     # create a dataframe of the 36 individual category columns
     categories = pd.DataFrame(df.categories.str.split(';', expand = True))
     
@@ -61,11 +84,30 @@ def clean_data(df):
     return(df)
 
 def save_data(df, database_filename):
+    """
+    saves dataframe to SQL-db
+    
+    Parameters:
+    - dataframe,
+    - filename of SQL-db
+    
+    Returns:
+    -
+    """
     engine = sqlalchemy.create_engine('sqlite:///' + database_filename)
     df.to_sql('DisasterResponse_db', engine, index=False)  
 
 
 def main():
+    """
+    main funtions, flow control
+    
+    Parameters:
+    -
+    
+    Returns:
+    -
+    """
     if len(sys.argv) == 4:
 
         messages_filepath, categories_filepath, database_filepath = sys.argv[1:]

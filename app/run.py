@@ -8,13 +8,22 @@ from nltk.tokenize import word_tokenize
 from flask import Flask
 from flask import render_template, request, jsonify
 from plotly.graph_objs import Bar
-from sklearn.externals import joblib
+from joblib import load
 from sqlalchemy import create_engine
 
 
 app = Flask(__name__)
 
 def tokenize(text):
+    """
+    tokenizes and lemmatizes text
+    
+    Parameters:
+    - text to be tokenized and lemmatized.
+    
+    Returns:
+    - tokenized and lemmatized text
+    """
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
 
@@ -30,13 +39,22 @@ engine = create_engine('sqlite:///../data/DisasterResponse.db')
 df = pd.read_sql_table('DisasterResponse_db', engine)
 
 # load model
-model = joblib.load("../models/classifier.pkl")
+model = load("../models/classifier.joblib")
 
 
 # index webpage displays cool visuals and receives user input text for model
 @app.route('/')
 @app.route('/index')
 def index():
+    """
+    creats web-page for '/' and '/index'
+    
+    Parameters:
+    - 
+    
+    Returns:
+    - 
+    """
     
     # extract data needed for visuals
     #
@@ -99,6 +117,15 @@ def index():
 # web page that handles user query and displays model results
 @app.route('/go')
 def go():
+    """
+    creats web-page for '/go'
+    
+    Parameters:
+    - 
+    
+    Returns:
+    - 
+    """
     # save user input in query
     query = request.args.get('query', '') 
 

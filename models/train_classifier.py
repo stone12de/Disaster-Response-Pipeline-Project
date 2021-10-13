@@ -18,6 +18,15 @@ from sklearn.model_selection import GridSearchCV
 from joblib import dump
 
 def load_data(database_filepath):
+    """
+    Loads sql-db.
+    
+    Parameters:
+    - File name of database.
+    
+    Returns:
+    - features, targets, names of categories
+    """
     # load data from database
     engine = create_engine('sqlite:///' + database_filepath)
 
@@ -36,6 +45,15 @@ def load_data(database_filepath):
     return(X, y, category_names)
 
 def tokenize(text):
+    """
+    tokenizes and lemmatizes text
+    
+    Parameters:
+    - text to be tokenized and lemmatized.
+    
+    Returns:
+    - tokenized and lemmatized text
+    """
     # separite words
     tokens = word_tokenize(text)
     
@@ -53,6 +71,15 @@ def tokenize(text):
     return clean_tokens
 
 def build_model():
+    """
+    build model
+    
+    Parameters:
+    -
+    
+    Returns:
+    - model
+    """
     # build pipeline:
     # take the best parameters from optimization in "
     
@@ -66,6 +93,19 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    """
+    evaluates model
+    
+    Parameters:
+    - model to be evaluated
+    - test-features
+    - test-targets
+    - names of categories
+    
+    Returns:
+    -
+    """
+    
     # make prediction of test-data using optimized model
     y_pred = model.predict(X_test)
     
@@ -80,10 +120,29 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 
 def save_model(model, model_filepath):
+    """
+    saves model to joblib
+    
+    Parameters:
+    - model to be saved
+    - file name of model
+    
+    Returns:
+    -
+    """
     dump(model,model_filepath)
 
 
 def main():
+    """
+    main funtions, flow control
+    
+    Parameters:
+    -
+    
+    Returns:
+    -
+    """
     if len(sys.argv) == 3:
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
