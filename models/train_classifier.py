@@ -19,7 +19,7 @@ from joblib import dump
 
 def load_data(database_filepath):
     # load data from database
-    engine = create_engine(database_filepath)
+    engine = create_engine('sqlite:///' + database_filepath)
 
     # read table
     df = pd.read_sql('InsertTableName', engine)
@@ -32,7 +32,8 @@ def load_data(database_filepath):
     
     # target headlines
     category_names = y.columns
-
+    
+    return(X, y, category_names)
 
 def tokenize(text):
     # separite words
