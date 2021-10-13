@@ -22,7 +22,7 @@ def load_data(database_filepath):
     engine = create_engine('sqlite:///' + database_filepath)
 
     # read table
-    df = pd.read_sql('InsertTableName', engine)
+    df = pd.read_sql('DisasterResponse_db', engine)
     
     # message column -> feature
     X = df.message
@@ -54,8 +54,7 @@ def tokenize(text):
 
 def build_model():
     # build pipeline:
-    # small Ramdom Forest
-    # => little number of trees
+    # take the best parameters from optimization in "
     
     pipeline1 = Pipeline([
             ('vect', CountVectorizer(tokenizer=tokenize)),
