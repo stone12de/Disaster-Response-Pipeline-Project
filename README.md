@@ -44,4 +44,4 @@ python run.py
   - DisasterResponse.db # database to save clean data to
 - models
   - train_classifier.py # machine learning pipeline
-  - classifier.joblib # saved model
+  - classifier.joblib # saved model (too large to send to github, but will be created by "train_classifier.py")
